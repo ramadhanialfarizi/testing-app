@@ -10,6 +10,12 @@ class ThirdScreen extends StatefulWidget {
 class _ThirdScreenState extends State<ThirdScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Third Screen'),
+        elevation: 0,
+        centerTitle: true,
+      ),
+    );
   }
 }

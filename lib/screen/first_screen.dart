@@ -45,34 +45,42 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget input() {
     return Padding(
       padding: const EdgeInsets.all(20),
-      child: Column(
-        children: [
-          TextFormField(
-            controller: name,
-            decoration: InputDecoration(
-              hintText: "Name",
-              filled: true,
-              fillColor: Colors.white,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10.0),
+      child: Form(
+        key: formkey,
+        child: Column(
+          children: [
+            TextFormField(
+              controller: name,
+              decoration: InputDecoration(
+                hintText: "Name",
+                filled: true,
+                fillColor: Colors.white,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+              ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return "please enter name";
+                }
+              },
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            TextFormField(
+              controller: palindrome,
+              decoration: InputDecoration(
+                hintText: "Palindrom",
+                filled: true,
+                fillColor: Colors.white,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
               ),
             ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          TextFormField(
-            controller: palindrome,
-            decoration: InputDecoration(
-              hintText: "Palindrom",
-              filled: true,
-              fillColor: Colors.white,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -90,7 +98,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 var text = palindrome.text;
                 var reverse = text.split("").reversed.join("");
 
-                if (text == reverse) {
+                if (text == null || text.isEmpty) {
+                  showDialog(
+                    context: context,
+                    builder: (context) => const AlertDialog(
+                      content: Text('text is empty, please fill the text'),
+                    ),
+                  );
+                } else if (text == reverse) {
                   showDialog(
                     context: context,
                     builder: (context) => const AlertDialog(
@@ -118,7 +133,9 @@ class _HomeScreenState extends State<HomeScreen> {
             child: ElevatedButton(
               onPressed: () {
                 var value = name.text;
-                Navigator.of(context).pushNamed('/second', arguments: value);
+                if (formkey.currentState!.validate()) {
+                  Navigator.of(context).pushNamed('/second', arguments: value);
+                }
               },
               child: const Text('Next'),
             ),

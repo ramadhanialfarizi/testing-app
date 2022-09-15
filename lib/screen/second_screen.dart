@@ -64,7 +64,9 @@ class _SecondScreenState extends State<SecondScreen> {
             width: double.infinity,
             height: 40.0,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pushNamed('/third');
+              },
               child: const Text('Choose a user'),
             ),
           ),

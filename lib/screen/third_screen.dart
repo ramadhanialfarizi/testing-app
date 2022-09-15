@@ -32,7 +32,7 @@ class _ThirdScreenState extends State<ThirdScreen> {
         builder: (BuildContext context, UserProvider provider, Widget? _) {
           if (provider.userData.isEmpty) {
             return const Padding(
-              padding: EdgeInsets.only(top: 70.0),
+              padding: EdgeInsets.only(top: 50.0),
               child: Center(
                 child: Text('No have data'),
               ),
@@ -42,7 +42,11 @@ class _ThirdScreenState extends State<ThirdScreen> {
               itemCount: provider.userData.length,
               itemBuilder: (context, index) {
                 return ListTile(
-                  leading: const Icon(Icons.account_circle),
+                  leading: CircleAvatar(
+                    radius: 30,
+                    backgroundImage:
+                        NetworkImage(provider.userData[index].image!),
+                  ),
                   title: Text(provider.userData[index].name!),
                   subtitle: Text(provider.userData[index].email!),
                 );

@@ -2,17 +2,15 @@ class UserAccountModal {
   String? id;
   String? email;
   String? name;
+  String? image;
 
-  UserAccountModal({
-    this.id,
-    this.email,
-    this.name,
-  });
+  UserAccountModal({this.id, this.email, this.name, this.image});
 
   UserAccountModal.fromJson(Map<String, dynamic> json) {
     id = json['id'].toString();
     email = json['email'];
     name = json['first_name'] + " " + json['last_name'];
+    image = json['avatar'];
   }
 }
 

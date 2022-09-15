@@ -1,5 +1,5 @@
 class UserAccountModal {
-  int? id;
+  String? id;
   String? email;
   String? name;
 
@@ -9,18 +9,10 @@ class UserAccountModal {
     this.name,
   });
 
-  UserAccountModal.fromJson(Map json) {
-    id = json['data']['id'];
-    email = json['data']['email'];
-    name = json['data']['first_name'] + json['data']['last_name'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['name'] = name;
-    data['phone'] = email;
-    return data;
+  UserAccountModal.fromJson(Map<String, dynamic> json) {
+    id = json['id'].toString();
+    email = json['email'];
+    name = json['first_name'] + " " + json['last_name'];
   }
 }
 
